@@ -32,7 +32,9 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+			<!--  inibe a mensagem de    Whitelabel Error Page
 			<scope>runtime</scope>
+			-->
 		</dependency>
 
 		<dependency>
