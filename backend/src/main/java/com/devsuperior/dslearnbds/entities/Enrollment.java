@@ -19,26 +19,26 @@ public class Enrollment implements Serializable {
 	private EnrollmentPK id = new EnrollmentPK();
 	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private Instant enrollMomment;
+	private Instant enrollMoment;
 	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant refundMoment;
 	// minusculo porque só vai ter valores falso ou verdadeiro
 	// se fosse para tres valores ( nulo, falso ou verdadeiro) usuaria o wrapper ( b maiúsculo).
-	private boolean availabe;
+	private boolean available;
 	private boolean onlyUpdate;
 	
 	public Enrollment()	{
 	}
 
-	public Enrollment(User user, Offer offer, Instant enrollMomment, Instant refundMoment, boolean availabe,
+	public Enrollment(User user, Offer offer, Instant enrollMoment, Instant refundMoment, boolean available,
 			boolean onlyUpdate) {
 		super();
 		id.setUser(user);
 		id.setOffer(offer);
-		this.enrollMomment = enrollMomment;
+		this.enrollMoment = enrollMoment;
 		this.refundMoment = refundMoment;
-		this.availabe = availabe;
+		this.available = available;
 		this.onlyUpdate = onlyUpdate;
 	}
 
@@ -68,12 +68,12 @@ public class Enrollment implements Serializable {
 		id.setOffer(offer);
 	}
 	
-	public Instant getEnrollMomment() {
-		return enrollMomment;
+	public Instant getEnrollMoment() {
+		return enrollMoment;
 	}
 
-	public void setEnrollMomment(Instant enrollMomment) {
-		this.enrollMomment = enrollMomment;
+	public void setEnrollMoment(Instant enrollMoment) {
+		this.enrollMoment = enrollMoment;
 	}
 
 	public Instant getRefundMoment() {
@@ -84,12 +84,12 @@ public class Enrollment implements Serializable {
 		this.refundMoment = refundMoment;
 	}
 
-	public boolean isAvailabe() {
-		return availabe;
+	public boolean isAvailable() {
+		return available;
 	}
 
-	public void setAvailabe(boolean availabe) {
-		this.availabe = availabe;
+	public void setAvailable(boolean availabe) {
+		this.available = availabe;
 	}
 
 	public boolean isOnlyUpdate() {
