@@ -1,7 +1,9 @@
 package com.devsuperior.dslearnbds.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -14,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 // herança total - só instancia as subclasses
@@ -34,6 +37,9 @@ public abstract class Lesson implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "section_id")
 	private Section section;
+	
+	@OneToMany(mappedBy = "lesson")
+	private List<Deliver> deliveries = new ArrayList<>();
 	
 	// Associação de muitos pra muitos e
 	// e o set garante a não repetição
@@ -99,6 +105,10 @@ public abstract class Lesson implements Serializable {
 		return enrollmentsDone;
 	}
 
+	public List<Deliver> getDeliveries() {
+		return deliveries;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
