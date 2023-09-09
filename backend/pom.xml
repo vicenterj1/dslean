@@ -16,6 +16,9 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<!-- infra de segurança -->
+		<spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+	
 	</properties>
 
 	<dependencies>
@@ -48,6 +51,24 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
+		<!-- infra de validação para os exceptions -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+				
+		<!--  segurança - inicio -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security.oauth.boot</groupId>
+			<artifactId>spring-security-oauth2-autoconfigure</artifactId>
+		</dependency>
+		<!--  segurança - fim     -->				
 	</dependencies>
 
 	<build>
@@ -58,4 +79,17 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+		<dependencyManagement>
+		<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-dependencies</artifactId>
+			<version>${spring-cloud.version}</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
 </project>
