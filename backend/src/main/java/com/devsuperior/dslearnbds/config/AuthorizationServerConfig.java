@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -46,6 +47,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private JwtTokenEnhancer tokenEnhancer;
 	
+	@Autowired
+	private UserDetailsService userDetailService;
+	
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 		// nome do metodo
@@ -59,8 +63,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 				.withClient(clientId)  //nome da aplicação que está configurado na aplicação
 				.secret(passwordEncoder.encode(clientSecret)) //senha da aplicação
 				.scopes("read","write")
-				.authorizedGrantTypes("password")
-				.accessTokenValiditySeconds(jwtDuration); //tempo de validação do token
+				.authorizedGrantTypes("password", "refresh_token")
+				.accessTokenValiditySeconds(jwtDuration) //tempo de validação do token
+				.refreshTokenValiditySeconds(jwtDuration);
 	}
 
 	@Override
@@ -73,7 +78,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		endpoints.authenticationManager(authenticationManager)
 			.tokenStore(tokenStore)	//quais os objetos ressponsáveis por processar
 			.accessTokenConverter(accessTokenConverter)
-			.tokenEnhancer(chain);
+			.tokenEnhancer(chain)
+			.userDetailsService(userDetailService);
 	}
 
 	
